@@ -1,0 +1,21 @@
+
+<h1>Current Version </h1>
+<% if @current_blog.present? %>
+<p>title: <%= @current_blog.title %> | current version | 
+
+<p> blog content: <%= @current_blog.content %>  </p>
+<h3><%= link_to "edit", edit_blog_path(@current_blog) %> | updated at <%=@current_blog.updated_at.strftime("%FT%T") %> </h3> 
+
+</p>
+<% end%>
+<h1>Previous Versions </h1>
+<% if @blogs.present? %>
+  <% @blogs.each do | blog| %>
+     <p>title: <%= blog.title %> | <%= link_to 'edit', edit_blog_path(blog) %> &nbsp updated at <%=@current_blog.updated_at.strftime("%FT%T") %> </p> <br>
+     <p>blog content: <%= blog.content %></p>
+     <h3><%= link_to "edit", edit_blog_path(blog) %> | updated at <%=@current_blog.updated_at.strftime("%FT%T") %> </h3> 
+  <% end%>
+
+<%end%>
+
+<h3>compare the difference between two files <%= link_to "content diff", diff_content_path(@current_blog, Blog.last)%> </h3>
